@@ -2,14 +2,15 @@ import { fetchSessionizeData } from "@/lib/api";
 import { SessionContainer } from "@/components/session-container";
 import { redirect } from "next/navigation";
 
-export default async function SessionsPage({
-  searchParams,
-}: {
-  searchParams: { sessionKey?: string };
-}) {
-  const sessionKey = searchParams.sessionKey;
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-  if (!sessionKey) {
+export default async function SessionsPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const sessionKey = params.sessionKey;
+
+  if (!sessionKey || typeof sessionKey !== "string") {
     redirect("/setup");
   }
 
