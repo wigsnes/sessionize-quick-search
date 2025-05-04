@@ -3,7 +3,7 @@ import { SessionContainer } from "@/components/session-container";
 import { redirect } from "next/navigation";
 
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function SessionsPage({ searchParams }: PageProps) {
